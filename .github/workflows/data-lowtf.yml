@@ -1,0 +1,43 @@
+name: data-lowtf
+# 짧은 봉(1분·5분) 최근 구간 — 필요할 때만 수동 실행 → data-lowtf 브랜치 (덮어쓰기)
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "받을 최근 일수"
+        default: "180"
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        coin: [BTC, ETH, SOL, XRP, DOGE]
+        bar: [1m, 5m]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/data/fetch-okx-lowtf.mjs out ${{ matrix.coin }} ${{ matrix.bar }} ${{ inputs.days }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lowtf-${{ matrix.coin }}-${{ matrix.bar }}
+          path: out
+          retention-days: 3
+  publish:
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - run: |
+          mkdir -p pub/okx && for d in parts/lowtf-*; do cp -r "$d"/. pub/okx/; done && ls -la pub/okx
+          # 데이터 브랜치에는 앱 코드가 없어 Vercel 빌드가 실패한다 → 브랜치 자체에 배포 끄기 설정을 넣는다
+          cd pub && echo '{"git":{"deploymentEnabled":false}}' > vercel.json && git init -q -b data-lowtf && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "OKX 1m/5m recent $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data-lowtf

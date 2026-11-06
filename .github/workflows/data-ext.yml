@@ -1,0 +1,45 @@
+name: data-ext
+# 진입 학습용 확장 데이터 (바이낸스 공개 파일) — 수동 실행 → data-ext 브랜치 (덮어쓰기)
+on:
+  workflow_dispatch:  # 수동 전용 — 매달 자동 실행은 Actions 시간 절약 위해 끔
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - "spot-klines BTCUSDT 1h 2017-08"
+          - "um-klines BTCUSDT 1h 2019-09"
+          - "um-metrics BTCUSDT 5m 2021-12"
+          - "spot-klines ETHUSDT 1h 2017-08"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          set -- ${{ matrix.job }}
+          node scripts/data/fetch-binance-vision.mjs out "$1" "$2" "$3" "$4"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ext-${{ strategy.job-index }}
+          path: out
+          retention-days: 3
+  publish:
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - run: |
+          mkdir -p pub/ext && for d in parts/ext-*; do cp -r "$d"/. pub/ext/; done && ls -la pub/ext
+          # GitHub 파일 한도(100MB) — 큰 파일은 90MB 조각으로 (받을 때 cat 으로 이어 붙이면 원래 gz)
+          for f in pub/ext/*.gz; do if [ $(stat -c%s "$f") -gt 94000000 ]; then split -b 90m -d "$f" "$f.part" && rm "$f"; fi; done
+          cd pub && echo '{"git":{"deploymentEnabled":false}}' > vercel.json && git init -q -b data-ext && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "Binance ext $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data-ext

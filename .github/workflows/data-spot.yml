@@ -1,0 +1,20 @@
+name: data-spot
+# BTC 현물 장기 1분봉 (바이낸스 공개 파일, 2017-08~) — 필요할 때만 수동 실행 → data-spot 브랜치 (덮어쓰기)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/data/fetch-binance-spot.mjs pub/spot BTCUSDT
+      - run: |
+          cd pub && echo '{"git":{"deploymentEnabled":false}}' > vercel.json && git init -q -b data-spot && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "Binance spot 1m $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data-spot

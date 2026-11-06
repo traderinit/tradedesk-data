@@ -1,0 +1,22 @@
+name: data-universe
+# 바이낸스 현물 USDT 페어 전체(상장 폐지 포함) 일봉 — 수동 실행 → data-universe 브랜치 (덮어쓰기)
+on:
+  workflow_dispatch:  # 수동 전용 — 매달 자동 실행은 Actions 시간 절약 위해 끔
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/data/fetch-binance-universe.mjs pub/universe spot
+      - run: node scripts/data/fetch-binance-universe.mjs pub/universe um
+      - run: |
+          ls -la pub/universe
+          cd pub && echo '{"git":{"deploymentEnabled":false}}' > vercel.json && git init -q -b data-universe && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "Binance spot universe 1d $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data-universe

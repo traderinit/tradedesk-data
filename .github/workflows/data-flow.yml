@@ -1,0 +1,82 @@
+name: data-flow
+# ENTRY-v10 재료: 코인 20개 바이낸스 선물 포지션·주문 흐름 (미결제약정 · 롱숏 비율 · 시장가 매수량) — 수동 + 매달 → data-flow 브랜치 (덮어쓰기)
+on:
+  workflow_dispatch:  # 수동 전용 — 매달 자동 실행은 Actions 시간 절약 위해 끔
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        job:
+          - "um-metrics BTCUSDT 5m 2021-12"
+          - "um-klines BTCUSDT 1h 2020-01"
+          - "um-metrics ETHUSDT 5m 2021-12"
+          - "um-klines ETHUSDT 1h 2020-01"
+          - "um-metrics SOLUSDT 5m 2021-12"
+          - "um-klines SOLUSDT 1h 2020-01"
+          - "um-metrics XRPUSDT 5m 2021-12"
+          - "um-klines XRPUSDT 1h 2020-01"
+          - "um-metrics DOGEUSDT 5m 2021-12"
+          - "um-klines DOGEUSDT 1h 2020-01"
+          - "um-metrics ADAUSDT 5m 2021-12"
+          - "um-klines ADAUSDT 1h 2020-01"
+          - "um-metrics AVAXUSDT 5m 2021-12"
+          - "um-klines AVAXUSDT 1h 2020-01"
+          - "um-metrics LINKUSDT 5m 2021-12"
+          - "um-klines LINKUSDT 1h 2020-01"
+          - "um-metrics LTCUSDT 5m 2021-12"
+          - "um-klines LTCUSDT 1h 2020-01"
+          - "um-metrics BCHUSDT 5m 2021-12"
+          - "um-klines BCHUSDT 1h 2020-01"
+          - "um-metrics NEARUSDT 5m 2021-12"
+          - "um-klines NEARUSDT 1h 2020-01"
+          - "um-metrics UNIUSDT 5m 2021-12"
+          - "um-klines UNIUSDT 1h 2020-01"
+          - "um-metrics TRXUSDT 5m 2021-12"
+          - "um-klines TRXUSDT 1h 2020-01"
+          - "um-metrics FILUSDT 5m 2021-12"
+          - "um-klines FILUSDT 1h 2020-01"
+          - "um-metrics AAVEUSDT 5m 2021-12"
+          - "um-klines AAVEUSDT 1h 2020-01"
+          - "um-metrics DOTUSDT 5m 2021-12"
+          - "um-klines DOTUSDT 1h 2020-01"
+          - "um-metrics CRVUSDT 5m 2021-12"
+          - "um-klines CRVUSDT 1h 2020-01"
+          - "um-metrics XLMUSDT 5m 2021-12"
+          - "um-klines XLMUSDT 1h 2020-01"
+          - "um-metrics ETCUSDT 5m 2021-12"
+          - "um-klines ETCUSDT 1h 2020-01"
+          - "um-metrics RSRUSDT 5m 2021-12"
+          - "um-klines RSRUSDT 1h 2020-01"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          set -- ${{ matrix.job }}
+          node scripts/data/fetch-binance-vision.mjs out "$1" "$2" "$3" "$4"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flow-${{ strategy.job-index }}
+          path: out
+          retention-days: 3
+  publish:
+    needs: fetch
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - run: |
+          mkdir -p pub/flow && for d in parts/flow-*; do cp -r "$d"/. pub/flow/; done && ls -la pub/flow
+          for f in pub/flow/*.gz; do if [ $(stat -c%s "$f") -gt 94000000 ]; then split -b 90m -d "$f" "$f.part" && rm "$f"; fi; done
+          cd pub && echo '{"git":{"deploymentEnabled":false}}' > vercel.json && git init -q -b data-flow && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "Binance flow $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data-flow

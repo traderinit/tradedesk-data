@@ -1,0 +1,63 @@
+name: data-alts
+# 바이낸스 USDT 무기한 전체(상장 폐지 포함) 1시간봉 — 알트 전수 검증용 · 수동 + 매달 → data-alts 브랜치 (덮어쓰기)
+on:
+  workflow_dispatch:  # 수동 전용 — 매달 자동 실행은 Actions 시간 절약 위해 끔
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 24
+      matrix:
+        shard:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/data/fetch-um-alts.mjs out ${{ matrix.shard }} 24
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alts-${{ matrix.shard }}
+          path: out
+          retention-days: 3
+  publish:
+    needs: fetch
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - run: |
+          mkdir -p pub/alts && for d in parts/alts-*; do cp -r "$d"/. pub/alts/; done && ls pub/alts | wc -l && du -sh pub/alts
+          cd pub && echo '{"git":{"deploymentEnabled":false}}' > vercel.json && git init -q -b data-alts && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "Binance UM alts 1h $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data-alts

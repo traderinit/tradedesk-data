@@ -1,0 +1,54 @@
+name: data
+# OKX 캔들(15m·1H·4H·1D)·시장 구조·펀딩비를 매일 모아 data 브랜치(커밋 1개, 덮어쓰기)에 저장 — 공개 저장소라 Actions 무료
+# 코인별로 나눠 동시에 받는다 (요청 한도는 IP 단위)
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: data
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        coin: [BTC, ETH, SOL, XRP, DOGE, ADA, AVAX, LINK, LTC, BCH, NEAR, UNI, TRX, FIL, AAVE, DOT, CRV, XLM, ETC, RSR]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 이전 데이터 가져오기
+        run: |
+          mkdir -p store/okx
+          if git fetch origin data --depth=1; then git archive FETCH_HEAD okx | tar -x -C store || true; fi
+          find store/okx -type f ! -name "${{ matrix.coin }}-*" -delete
+      - name: OKX 받기·검증
+        run: node scripts/data/fetch-okx.mjs store/okx ${{ matrix.coin }}
+      - name: 시장 구조 데이터 (OI·현물·mark·index·펀딩/상품 스냅샷) + 점검
+        run: node scripts/data/fetch-okx-market.mjs store/okx ${{ matrix.coin }} || echo "시장 구조 수집 실패 — 다음 실행에"
+      - name: 과거 펀딩비 보강 (바이낸스 공개 파일)
+        run: node scripts/data/fetch-binance-funding.mjs store/okx ${{ matrix.coin }} || echo "펀딩비 보강 실패 — 다음 실행에"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: okx-${{ matrix.coin }}
+          path: store/okx
+          retention-days: 3
+  publish:
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: data 브랜치에 저장 (덮어쓰기)
+        run: |
+          mkdir -p pub/okx
+          for d in parts/okx-*; do cp -r "$d"/. pub/okx/; done
+          ls pub/okx | wc -l
+          cd pub && git init -q -b data && git add -A
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" commit -qm "OKX data $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data
