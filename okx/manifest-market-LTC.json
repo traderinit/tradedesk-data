@@ -1,0 +1,132 @@
+{
+  "coin": "LTC",
+  "collectedAt": "2026-11-07T10:12:56.434Z",
+  "files": [
+    {
+      "file": "LTC-USDT-SWAP_oi1H.csv.gz",
+      "sha256": "eac14527ef2b2dff2fcee8e0bdd1d580dae474401f9b3e1fa629acad5745b3f5",
+      "fetched": 1440,
+      "refetched": 1432,
+      "revised": 1,
+      "unitJumps": [],
+      "rows": 1578,
+      "first": 1788368400000,
+      "last": 1794045600000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "LTC-USDT_1H.csv.gz",
+      "sha256": "261b9e8cc988a085d0f3d23be9b938aef95c4c60729931d5b996878791aac0fa",
+      "refetched": 91,
+      "revised": 0,
+      "rows": 68818,
+      "first": 1546300800000,
+      "last": 1794042000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "LTC-USDT_index1H.csv.gz",
+      "sha256": "617a58f57d5cd9958db33e4b3a78fd48230740e032438931d925a97f30700e0c",
+      "refetched": 91,
+      "revised": 0,
+      "rows": 42514,
+      "first": 1640995200000,
+      "last": 1794042000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "LTC-USDT-SWAP_mark1H.csv.gz",
+      "sha256": "cf7ccb6cefda90f0b43358b5c32efe6e196cb2e5df278f3dff7f6eeeeed9fd10",
+      "refetched": 91,
+      "revised": 0,
+      "rows": 42514,
+      "first": 1640995200000,
+      "last": 1794042000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    }
+  ],
+  "snapshots": {
+    "instruments": {
+      "swapState": "live",
+      "swapListTime": 1573557408000,
+      "ctVal": 1,
+      "ctValCcy": "LTC",
+      "spotState": "live",
+      "spotListTime": 1611907686000
+    },
+    "funding": {
+      "fundingTime": 1794067200000,
+      "nextFundingTime": 1794096000000,
+      "intervalH": 8,
+      "method": "current_period",
+      "max": 0.01,
+      "min": -0.01
+    }
+  },
+  "checks": {
+    "basisPerpSpot": {
+      "n": 60154,
+      "p01": -0.0011930326890956522,
+      "p50": 0,
+      "p99": 0.0019196805651540139,
+      "over": 0,
+      "warn": 0.05
+    },
+    "indexVsSpot": {
+      "n": 42514,
+      "p01": -0.0006669630947085947,
+      "p50": -0.00009019572472268589,
+      "p99": 0.0005128205128206442,
+      "over": 1,
+      "warn": 0.02
+    },
+    "markVsIndex": {
+      "n": 42514,
+      "p01": -0.0009791442279447615,
+      "p50": -0.0001311475409836449,
+      "p99": 0.0007096224808402773,
+      "over": 0,
+      "warn": 0.03
+    },
+    "oiUnit": {
+      "rows": 1578,
+      "ctVal": 1,
+      "mismatch": 0
+    },
+    "beforeListingPerp": 0,
+    "beforeListingSpot": 18224,
+    "funding": {
+      "rows": 309,
+      "offHour": 0,
+      "intervalHours": {
+        "8": 308
+      }
+    },
+    "beforeListingSpotNote": "OKX 현물 listTime 은 실제 상장 시각이 아닐 수 있음 (참고값)"
+  },
+  "errors": [],
+  "warnings": [
+    "LTC-USDT-SWAP_oi1H.csv.gz: 다시 받은 값 변경 1/1432",
+    "지수-현물 2% 초과 1"
+  ]
+}

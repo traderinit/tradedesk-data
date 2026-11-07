@@ -1,0 +1,48 @@
+{
+  "source": "OKX",
+  "updatedAt": "2026-11-07T10:09:00.877Z",
+  "start": {
+    "15m": 1640995200000,
+    "1H": 1546300800000,
+    "4H": 1546300800000,
+    "1Dutc": 1546300800000
+  },
+  "files": [
+    {
+      "file": "BCH-USDT-SWAP_1H.csv.gz",
+      "rows": 60154,
+      "first": 1577491200000,
+      "last": 1794042000000,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "BCH-USDT-SWAP_4H.csv.gz",
+      "rows": 15038,
+      "first": 1577491200000,
+      "last": 1794024000000,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 2
+    },
+    {
+      "file": "BCH-USDT-SWAP_1Dutc.csv.gz",
+      "rows": 2502,
+      "first": 1577836800000,
+      "last": 1793923200000,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 11
+    },
+    {
+      "file": "BCH-USDT-SWAP_funding.csv.gz",
+      "rows": 309,
+      "first": 1785168000000,
+      "last": 1794038400000
+    }
+  ]
+}
