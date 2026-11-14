@@ -1,0 +1,134 @@
+{
+  "coin": "AVAX",
+  "collectedAt": "2026-11-14T16:13:03.034Z",
+  "files": [
+    {
+      "file": "AVAX-USDT-SWAP_oi1H.csv.gz",
+      "sha256": "995c74711273eabe04675fb6b1e264ff05aa313c7bfad0b78e431431e5797050",
+      "fetched": 1440,
+      "refetched": 1438,
+      "revised": 1,
+      "unitJumps": [],
+      "rows": 1753,
+      "first": 1788364800000,
+      "last": 1794672000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "AVAX-USDT_1H.csv.gz",
+      "sha256": "d00e6f1f4d8fe90acd8701a180618133e67c4477b499df182634339f7d4ddb15",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 53864,
+      "first": 1600761600000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "AVAX-USDT_index1H.csv.gz",
+      "sha256": "91deaafb4b6bc4cc05ced63d7a636352ca26e5cbae247d17862b67cd44263043",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "AVAX-USDT-SWAP_mark1H.csv.gz",
+      "sha256": "51deb8d467d6ee67b3b952e7ed677846b64ed038da9de30d37028d077058471d",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    }
+  ],
+  "snapshots": {
+    "instruments": {
+      "swapState": "live",
+      "swapListTime": 1600840800000,
+      "ctVal": 1,
+      "ctValCcy": "AVAX",
+      "spotState": "live",
+      "spotListTime": 1611907686000
+    },
+    "funding": {
+      "fundingTime": 1794700800000,
+      "nextFundingTime": 1794729600000,
+      "intervalH": 8,
+      "method": "current_period",
+      "max": 0.01,
+      "min": -0.01
+    }
+  },
+  "checks": {
+    "basisPerpSpot": {
+      "n": 53844,
+      "p01": -0.002042900919305368,
+      "p50": -0.00018138944313450533,
+      "p99": 0.0035499726925176667,
+      "over": 39,
+      "warn": 0.05
+    },
+    "indexVsSpot": {
+      "n": 42688,
+      "p01": -0.000932835820895539,
+      "p50": -0.00004528985507235017,
+      "p99": 0.000603363752922581,
+      "over": 1,
+      "warn": 0.02
+    },
+    "markVsIndex": {
+      "n": 42688,
+      "p01": -0.0012526932905748689,
+      "p50": -0.00024975024975026905,
+      "p99": 0.0007550450739026715,
+      "over": 1,
+      "warn": 0.03
+    },
+    "oiUnit": {
+      "rows": 1753,
+      "ctVal": 1,
+      "mismatch": 0
+    },
+    "beforeListingPerp": 1,
+    "beforeListingSpot": 3096,
+    "funding": {
+      "rows": 331,
+      "offHour": 0,
+      "intervalHours": {
+        "8": 330
+      }
+    },
+    "beforeListingSpotNote": "OKX 현물 listTime 은 실제 상장 시각이 아닐 수 있음 (참고값)"
+  },
+  "errors": [],
+  "warnings": [
+    "AVAX-USDT-SWAP_oi1H.csv.gz: 다시 받은 값 변경 1/1438",
+    "무기한 상장 전 데이터 1",
+    "지수-현물 2% 초과 1",
+    "무기한-현물 5% 초과 39"
+  ]
+}

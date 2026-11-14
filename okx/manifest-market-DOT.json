@@ -1,0 +1,133 @@
+{
+  "coin": "DOT",
+  "collectedAt": "2026-11-14T16:12:51.000Z",
+  "files": [
+    {
+      "file": "DOT-USDT-SWAP_oi1H.csv.gz",
+      "sha256": "3b0b293dff4dbdef164210277c34963ef243c2dc7c53527cc9ed37757fe8876b",
+      "fetched": 1440,
+      "refetched": 1438,
+      "revised": 1,
+      "unitJumps": [],
+      "rows": 1752,
+      "first": 1788368400000,
+      "last": 1794672000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "DOT-USDT_1H.csv.gz",
+      "sha256": "08fdcef0f897b8659c520f89e488b8acb3f508af6a7ae985635a96e87dd30ddf",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 54606,
+      "first": 1598090400000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "DOT-USDT_index1H.csv.gz",
+      "sha256": "e76d8ca7ae14a064b2a69335d30adc28e3d4b755f03a19f4fd9bd423663c8559",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "DOT-USDT-SWAP_mark1H.csv.gz",
+      "sha256": "f54b5fd376213c817aa1b56dc94266fa441d72f1ebfc2f86628473f5e704baf8",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    }
+  ],
+  "snapshots": {
+    "instruments": {
+      "swapState": "live",
+      "swapListTime": 1598350371000,
+      "ctVal": 1,
+      "ctValCcy": "DOT",
+      "spotState": "live",
+      "spotListTime": 1611907686000
+    },
+    "funding": {
+      "fundingTime": 1794700800000,
+      "nextFundingTime": 1794729600000,
+      "intervalH": 8,
+      "method": "current_period",
+      "max": 0.01,
+      "min": -0.01
+    }
+  },
+  "checks": {
+    "basisPerpSpot": {
+      "n": 54540,
+      "p01": -0.0022091310751105597,
+      "p50": -0.00016103059581329404,
+      "p99": 0.003472222222222099,
+      "over": 1,
+      "warn": 0.05
+    },
+    "indexVsSpot": {
+      "n": 42688,
+      "p01": -0.0009667440061871257,
+      "p50": -0.000009023099133642631,
+      "p99": 0.0006198667286532178,
+      "over": 0,
+      "warn": 0.02
+    },
+    "markVsIndex": {
+      "n": 42688,
+      "p01": -0.0019193857965450478,
+      "p50": -0.00023337222870489782,
+      "p99": 0.00071445582281493,
+      "over": 0,
+      "warn": 0.03
+    },
+    "oiUnit": {
+      "rows": 1752,
+      "ctVal": 1,
+      "mismatch": 0
+    },
+    "beforeListingPerp": 6,
+    "beforeListingSpot": 3838,
+    "funding": {
+      "rows": 331,
+      "offHour": 0,
+      "intervalHours": {
+        "8": 330
+      }
+    },
+    "beforeListingSpotNote": "OKX 현물 listTime 은 실제 상장 시각이 아닐 수 있음 (참고값)"
+  },
+  "errors": [],
+  "warnings": [
+    "DOT-USDT-SWAP_oi1H.csv.gz: 다시 받은 값 변경 1/1438",
+    "무기한 상장 전 데이터 6",
+    "무기한-현물 5% 초과 1"
+  ]
+}

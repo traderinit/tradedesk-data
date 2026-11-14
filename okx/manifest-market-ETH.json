@@ -1,0 +1,131 @@
+{
+  "coin": "ETH",
+  "collectedAt": "2026-11-14T16:14:00.730Z",
+  "files": [
+    {
+      "file": "ETH-USDT-SWAP_oi1H.csv.gz",
+      "sha256": "adf4fef6dd90927b31b98ad0c26cee60897a2a41f22935098401ffe9cffe464b",
+      "fetched": 1440,
+      "refetched": 1438,
+      "revised": 1,
+      "unitJumps": [],
+      "rows": 1753,
+      "first": 1788364800000,
+      "last": 1794672000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "ETH-USDT_1H.csv.gz",
+      "sha256": "3c391ed9afde691c0052989c0da51b5ed33b7cc3ef993cc06b12911e7ada222f",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 68992,
+      "first": 1546300800000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "ETH-USDT_index1H.csv.gz",
+      "sha256": "49dacd1d2df07d9938d910adc3ea7a7efb5dd809ce70cf604b5080c564ddce77",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "ETH-USDT-SWAP_mark1H.csv.gz",
+      "sha256": "3d9aaddd5c1f3e07668184a9d6abab08ab10d43882c4cb4ca762a36b707ff6a1",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    }
+  ],
+  "snapshots": {
+    "instruments": {
+      "swapState": "live",
+      "swapListTime": 1573557408000,
+      "ctVal": 0.1,
+      "ctValCcy": "ETH",
+      "spotState": "live",
+      "spotListTime": 1611907686000
+    },
+    "funding": {
+      "fundingTime": 1794700800000,
+      "nextFundingTime": 1794729600000,
+      "intervalH": 8,
+      "method": "current_period",
+      "max": 0.0075,
+      "min": -0.0075
+    }
+  },
+  "checks": {
+    "basisPerpSpot": {
+      "n": 60400,
+      "p01": -0.0007556417849484687,
+      "p50": -0.000019006348120242933,
+      "p99": 0.0019363972480930247,
+      "over": 0,
+      "warn": 0.05
+    },
+    "indexVsSpot": {
+      "n": 42688,
+      "p01": -0.0005079544621442444,
+      "p50": -0.00000811602671790812,
+      "p99": 0.0004337374793772497,
+      "over": 0,
+      "warn": 0.02
+    },
+    "markVsIndex": {
+      "n": 42688,
+      "p01": -0.0007030022330658525,
+      "p50": -0.00006577303042665239,
+      "p99": 0.0006518885852562217,
+      "over": 0,
+      "warn": 0.03
+    },
+    "oiUnit": {
+      "rows": 1753,
+      "ctVal": 0.1,
+      "mismatch": 0
+    },
+    "beforeListingPerp": 0,
+    "beforeListingSpot": 18224,
+    "funding": {
+      "rows": 331,
+      "offHour": 0,
+      "intervalHours": {
+        "8": 330
+      }
+    },
+    "beforeListingSpotNote": "OKX 현물 listTime 은 실제 상장 시각이 아닐 수 있음 (참고값)"
+  },
+  "errors": [],
+  "warnings": [
+    "ETH-USDT-SWAP_oi1H.csv.gz: 다시 받은 값 변경 1/1438"
+  ]
+}

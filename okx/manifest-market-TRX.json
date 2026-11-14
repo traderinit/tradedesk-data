@@ -1,0 +1,133 @@
+{
+  "coin": "TRX",
+  "collectedAt": "2026-11-14T16:14:00.769Z",
+  "files": [
+    {
+      "file": "TRX-USDT-SWAP_oi1H.csv.gz",
+      "sha256": "5e3b092eda0fdf4eda8f7759eaac38aa0ac055b42baf6a1f68147acdfb0d317b",
+      "fetched": 1440,
+      "refetched": 1438,
+      "revised": 1,
+      "unitJumps": [],
+      "rows": 1752,
+      "first": 1788368400000,
+      "last": 1794672000000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "TRX-USDT_1H.csv.gz",
+      "sha256": "c90235473ca6fee50fe2017d5b15f8d9e840960e963086820df4b9c9b5a44368",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 68992,
+      "first": 1546300800000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "TRX-USDT_index1H.csv.gz",
+      "sha256": "f60707482e29c4417539d50c211d2cf54a92d97c800ca205a48d378016e8f993",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    },
+    {
+      "file": "TRX-USDT-SWAP_mark1H.csv.gz",
+      "sha256": "bfc467220f2306ccc23764d0d5d0eb45783f4eb2cd809fe0384ac2667e72aab0",
+      "refetched": 97,
+      "revised": 0,
+      "rows": 42688,
+      "first": 1640995200000,
+      "last": 1794668400000,
+      "misaligned": 0,
+      "dup": 0,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 0
+    }
+  ],
+  "snapshots": {
+    "instruments": {
+      "swapState": "live",
+      "swapListTime": 1573557408000,
+      "ctVal": 1000,
+      "ctValCcy": "TRX",
+      "spotState": "live",
+      "spotListTime": 1611907686000
+    },
+    "funding": {
+      "fundingTime": 1794700800000,
+      "nextFundingTime": 1794729600000,
+      "intervalH": 8,
+      "method": "current_period",
+      "max": 0.01,
+      "min": -0.01
+    }
+  },
+  "checks": {
+    "basisPerpSpot": {
+      "n": 60232,
+      "p01": -0.009651844191658099,
+      "p50": -0.00017630465444284926,
+      "p99": 0.0015961691939345712,
+      "over": 43,
+      "warn": 0.05
+    },
+    "indexVsSpot": {
+      "n": 42688,
+      "p01": -0.0006539509536784838,
+      "p50": -0.00008078849571813151,
+      "p99": 0.0003714020427112441,
+      "over": 15,
+      "warn": 0.02
+    },
+    "markVsIndex": {
+      "n": 42688,
+      "p01": -0.0013630308850407502,
+      "p50": -0.00019544610573640764,
+      "p99": 0.0007317073170729493,
+      "over": 0,
+      "warn": 0.03
+    },
+    "oiUnit": {
+      "rows": 1752,
+      "ctVal": 1000,
+      "mismatch": 0
+    },
+    "beforeListingPerp": 0,
+    "beforeListingSpot": 18224,
+    "funding": {
+      "rows": 331,
+      "offHour": 0,
+      "intervalHours": {
+        "8": 330
+      }
+    },
+    "beforeListingSpotNote": "OKX 현물 listTime 은 실제 상장 시각이 아닐 수 있음 (참고값)"
+  },
+  "errors": [],
+  "warnings": [
+    "TRX-USDT-SWAP_oi1H.csv.gz: 다시 받은 값 변경 1/1438",
+    "지수-현물 2% 초과 15",
+    "무기한-현물 5% 초과 43"
+  ]
+}

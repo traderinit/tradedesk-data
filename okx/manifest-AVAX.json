@@ -1,0 +1,48 @@
+{
+  "source": "OKX",
+  "updatedAt": "2026-11-14T16:09:51.801Z",
+  "start": {
+    "15m": 1640995200000,
+    "1H": 1546300800000,
+    "4H": 1546300800000,
+    "1Dutc": 1546300800000
+  },
+  "files": [
+    {
+      "file": "AVAX-USDT-SWAP_1H.csv.gz",
+      "rows": 53844,
+      "first": 1600833600000,
+      "last": 1794668400000,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 2
+    },
+    {
+      "file": "AVAX-USDT-SWAP_4H.csv.gz",
+      "rows": 13461,
+      "first": 1600833600000,
+      "last": 1794657600000,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 1
+    },
+    {
+      "file": "AVAX-USDT-SWAP_1Dutc.csv.gz",
+      "rows": 2242,
+      "first": 1600905600000,
+      "last": 1794528000000,
+      "gaps": 0,
+      "missing": 0,
+      "bad": 0,
+      "jumps": 13
+    },
+    {
+      "file": "AVAX-USDT-SWAP_funding.csv.gz",
+      "rows": 331,
+      "first": 1785168000000,
+      "last": 1794672000000
+    }
+  ]
+}
